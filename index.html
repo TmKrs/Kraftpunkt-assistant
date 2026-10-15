@@ -5,44 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kraftpunkt Assistent – Demo</title>
   <meta name="description" content="Demo eines KI-Assistenten für Der Kraftpunkt & Physio365 in Neuötting.">
+  <link rel="icon" href="https://kraftpunkt.bayern/wp-content/uploads/2024/10/fav-new-300x300.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap">
   <style>
-    :root{--bg:#0f0f0f;--fg:#f4f2ee;--muted:#a9a59d;--accent:#e4572e;--card:#1a1a1a}
+    :root{--black:#000;--white:#fff;--blue:#3e94ef;--yellow:#f6c344;--grey:#4a4a4a;--muted:#bdbdbd}
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-    .demo{background:var(--accent);color:#fff;text-align:center;font-size:13px;padding:6px 16px}
-    header{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:1100px;margin:0 auto}
-    .logo{font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-    .logo span{color:var(--accent)}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:14px}
-    .hero{max-width:1100px;margin:0 auto;padding:72px 24px 56px}
-    .hero h1{font-size:clamp(34px,6vw,64px);line-height:1.05;margin:0 0 16px;max-width:14ch}
-    .hero p{color:var(--muted);max-width:52ch;font-size:18px}
-    .cta{display:inline-block;margin-top:20px;background:var(--accent);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:700}
-    .grid{max-width:1100px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:var(--card);border-radius:14px;padding:22px}
-    .card h3{margin:0 0 6px}.card p{margin:0;color:var(--muted);font-size:15px}
-    .hint{max-width:1100px;margin:0 auto 60px;padding:0 24px;color:var(--muted);font-size:14px}
-    @media (max-width:640px){nav{display:none}.hero{padding:48px 16px 40px}.grid,.hint{padding-left:16px;padding-right:16px}header{padding:16px}}
+    body{margin:0;background:var(--black);color:var(--white);font:16px/1.6 Montserrat,system-ui,sans-serif}
+    a{color:inherit}
+    .bebas{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.02em}
+    .blue{color:var(--blue)}
+
+    .demo{background:var(--blue);color:#fff;text-align:center;font-size:12px;padding:5px 16px}
+
+    header{display:flex;align-items:center;gap:24px;padding:10px 40px;max-width:1500px;margin:0 auto}
+    .logo img{height:110px;display:block}
+    nav{display:flex;gap:22px;margin-left:auto;align-items:center}
+    nav a{text-decoration:none;font:22px/1 "Bebas Neue",Impact,sans-serif;letter-spacing:.03em}
+    nav a:hover,nav a.active{color:var(--blue)}
+    .btn{display:inline-block;text-decoration:none;font:22px/1 "Bebas Neue",Impact,sans-serif;letter-spacing:.03em;padding:12px 18px;border-radius:3px}
+    .btn-grey{background:var(--grey);color:#fff}
+    .btn-yellow{background:var(--yellow);color:#fff}
+    .btn-outline{border:2px solid #fff;color:#fff;font:600 15px Montserrat,sans-serif;letter-spacing:0;padding:10px 28px;border-radius:2px;background:transparent;cursor:pointer}
+    .btn-outline:hover{background:#fff;color:#000}
+    .head-btns{display:flex;gap:16px;margin-left:18px}
+
+    .hero{position:relative;min-height:540px;display:grid;place-items:center;text-align:center;padding:60px 24px;
+      background:#111 url("https://kraftpunkt.bayern/wp-content/uploads/2024/12/210620_Barboza_CrossFit_Shoot-842-1024x683.jpg") center/cover}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .hero>*{position:relative}
+    .hero h1{margin:0;font-size:clamp(48px,9vw,130px);line-height:.95}
+    .hero p{margin:18px auto 28px;max-width:46ch;font-size:18px}
+
+    .intro{text-align:center;padding:80px 24px 50px}
+    .eyebrow{font-weight:700;letter-spacing:.06em;font-size:20px}
+    .intro h2{margin:10px 0 14px;font-size:clamp(36px,5.5vw,72px);line-height:1}
+    .intro p{margin:0 auto;max-width:70ch}
+
+    .tiles{max-width:1500px;margin:0 auto;padding:0 40px 90px;display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+    .tile{position:relative;min-height:440px;grid-column:span 2;background:#222 center/cover;display:flex;flex-direction:column;
+      justify-content:flex-end;align-items:flex-end;padding:40px;gap:16px;text-align:right}
+    .tile.wide{grid-column:span 3}
+    .tile::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.55))}
+    .tile>*{position:relative}
+    .tile h3{margin:0;font-weight:700;letter-spacing:.35em;font-size:15px;text-transform:uppercase}
+
+    .steps{max-width:1100px;margin:0 auto;padding:20px 40px 90px}
+    .steps h2{font-size:clamp(36px,5vw,64px);line-height:1;margin:0 0 20px}
+    .step{display:flex;gap:16px;margin:18px 0}
+    .step svg{flex:none;width:36px;height:36px}
+    .step b{display:block}
+
+    footer{border-top:1px solid #222;padding:50px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;max-width:1500px;margin:0 auto;font-size:14px;color:var(--muted)}
+    footer h4{margin:0 0 8px;color:#fff;font:26px/1 "Bebas Neue",Impact,sans-serif;letter-spacing:.03em}
+    footer p{margin:0}
+
+    @media (max-width:1100px){nav{display:none}.tile,.tile.wide{grid-column:span 3}}
+    @media (max-width:700px){
+      header{padding:10px 16px}.logo img{height:72px}.head-btns{margin-left:auto;gap:8px}.btn{font-size:18px;padding:9px 12px}
+      .tiles{grid-template-columns:1fr;padding:0 16px 60px}.tile,.tile.wide{grid-column:auto;min-height:320px;padding:24px}
+      .steps{padding:10px 16px 60px}footer{padding:40px 16px}.hero{min-height:440px}
+    }
   </style>
 </head>
 <body>
-  <div class="demo">Demo-Seite: Nur zum Testen des KI-Assistenten, nicht die offizielle Website.</div>
+  <div class="demo">Demo: KI-Assistent für Der Kraftpunkt. Nicht die offizielle Website. Chat unten rechts.</div>
+
   <header>
-    <div class="logo">Der <span>Kraft</span>punkt</div>
-    <nav><a href="#">Fitness</a><a href="#">Kurse</a><a href="#">Physio365</a><a href="#">Kontakt</a></nav>
+    <a class="logo" href="#"><img src="https://kraftpunkt.bayern/wp-content/uploads/2024/10/DerKraftpunkt-Logo-002-scaled.png" alt="Der Kraftpunkt & Physio 365"></a>
+    <nav><a href="#">Fitness</a><a href="#">Gruppenkurse</a><a href="#">Physiotherapie</a><a href="#">Gesundheitsberatung</a><a href="#">Konzepte</a></nav>
+    <div class="head-btns"><a class="btn btn-grey" href="#">Kontakt</a><a class="btn btn-yellow" href="#">Rezept</a></div>
   </header>
+
   <section class="hero">
-    <h1>Wir kennen den Weg zu deinem Ziel.</h1>
-    <p>Fitness, Gruppentraining, Physiotherapie und Gesundheitsberatung auf über 1.000 m² in Neuötting.</p>
-    <a class="cta" href="#" onclick="document.querySelector('.kp-btn').click();return false;">Frag unseren Assistenten</a>
+    <div>
+      <h1 class="bebas"><span class="blue">Wir kennen</span> den Weg<br>zu deinem Ziel</h1>
+      <p>Fitness, Gruppentraining, Physiotherapie und Gesundheitsberatung auf über 1.000 m² in Neuötting.</p>
+      <button class="btn-outline" onclick="document.querySelector('.kp-btn').click()">Frag unseren Assistenten</button>
+    </div>
   </section>
-  <section class="grid">
-    <div class="card"><h3>Fitness</h3><p>Bodybuilding, Powerlifting, Strongman und Athletik für alle Level.</p></div>
-    <div class="card"><h3>Alltagsheld</h3><p>Über 20 Gruppenkurse pro Woche, seit 2014.</p></div>
-    <div class="card"><h3>Physio365</h3><p>KG, Manuelle Therapie, Lymphdrainage mit 40 Minuten Behandlungszeit.</p></div>
-    <div class="card"><h3>Boost & T-Rena</h3><p>Anti-Schwerkraft-Laufband und Reha-Nachsorge.</p></div>
+
+  <section class="intro">
+    <div class="eyebrow">[ 365 TAGE STARK ]</div>
+    <h2 class="bebas">Deine Fragen - <span class="blue">sofort beantwortet</span></h2>
+    <p>Öffnungszeiten, Rezept einreichen, Kurse, InBody oder Boost-Laufband: Unser digitaler Assistent kennt die Antworten und verbindet dich bei allem Weiteren direkt mit dem Team.</p>
   </section>
-  <p class="hint">Unten rechts findest du den Chat. Er beantwortet Fragen nur mit Infos von kraftpunkt.bayern und verweist sonst an das Team.</p>
+
+  <section class="tiles">
+    <div class="tile" style="background-image:url('https://kraftpunkt.bayern/wp-content/uploads/2025/09/Fitnesserklaertext-1024x682.jpg')"><h3>Fitness</h3><button class="btn-outline" data-ask="Was bietet ihr im Fitnessbereich an?">Mehr erfahren</button></div>
+    <div class="tile" style="background-image:url('https://kraftpunkt.bayern/wp-content/uploads/2025/09/Kurse-Erklaertext-1024x682.jpg')"><h3>Gruppenkurse</h3><button class="btn-outline" data-ask="Wie funktionieren die Alltagsheld-Gruppenkurse?">Mehr erfahren</button></div>
+    <div class="tile" style="background-image:url('https://kraftpunkt.bayern/wp-content/uploads/2025/09/Physiotherapie-Erklaertext-1024x682.jpg')"><h3>Physiotherapie</h3><button class="btn-outline" data-ask="Welche Physiotherapie bietet Physio365 an?">Mehr erfahren</button></div>
+    <div class="tile wide" style="background-image:url('https://kraftpunkt.bayern/wp-content/uploads/2025/09/T-Rena-Erklaertext-1024x682.jpg')"><h3>T-Rena</h3><button class="btn-outline" data-ask="Was ist T-Rena und wie starte ich?">Mehr erfahren</button></div>
+    <div class="tile wide" style="background-image:url('https://kraftpunkt.bayern/wp-content/uploads/2025/09/Gesundheitsberatung-Erklaertext-1024x682.jpg')"><h3>Gesundheits-Beratung</h3><button class="btn-outline" data-ask="Wie läuft die kostenlose Gesundheitsberatung ab?">Mehr erfahren</button></div>
+  </section>
+
+  <section class="steps">
+    <h2 class="bebas">So hilft dir <span class="blue">der Assistent</span></h2>
+    <div class="step"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#3e94ef"/><path d="M7 12h9m-4-4 4 4-4 4" stroke="#000" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Frage stellen</b>Rund um die Uhr, auch wenn die Rezeption geschlossen ist.</div></div>
+    <div class="step"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#3e94ef"/><path d="M7 12h9m-4-4 4 4-4 4" stroke="#000" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Ehrliche Antwort</b>Nur mit Infos von kraftpunkt.bayern. Was er nicht weiß, erfindet er nicht.</div></div>
+    <div class="step"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#3e94ef"/><path d="M7 12h9m-4-4 4 4-4 4" stroke="#000" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Direkt zum Team</b>Für Termine, Rezepte und Gesundheitsfragen verlinkt er WhatsApp, Telefon oder Formular.</div></div>
+  </section>
+
+  <footer>
+    <div><h4>Der Kraftpunkt</h4><p>August-Unterholzner-Straße 7<br>84524 Neuötting<br>+49 (0)171 / 533 339 8</p></div>
+    <div><h4>Fitness</h4><p>Mo–Fr 07:00–21:00 Uhr<br>Sa–So 09:00–16:00 Uhr</p></div>
+    <div><h4>Physio365 Rezeption</h4><p>Mo 08–17 · Di 08–18 · Mi 08–12<br>Do 08–18 · Fr 08–12 Uhr</p></div>
+  </footer>
+
   <script src="/widget.js" defer></script>
+  <script>
+    // "Mehr erfahren" opens the chat and asks about that topic
+    document.querySelectorAll("[data-ask]").forEach((b) =>
+      b.addEventListener("click", () => window.kpAsk && window.kpAsk(b.dataset.ask))
+    );
+  </script>
 </body>
 </html>
