@@ -13,8 +13,16 @@ function readKnowledge(file) {
   return text.replace(/<!--[\s\S]*?-->/g, "").trim(); // drop notes meant for humans
 }
 
-export function buildSystemPrompt() {
-  return `${readKnowledge("regeln.md")}\n\n# WISSEN\n${readKnowledge("wissen.md")}`;
+// The model has no clock, so we tell it the current day and time in Germany.
+export function nowInGermany(date = new Date()) {
+  return new Intl.DateTimeFormat("de-DE", {
+    timeZone: "Europe/Berlin", weekday: "long", day: "numeric", month: "long", year: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  }).format(date);
+}
+
+export function buildSystemPrompt(date = new Date()) {
+  return `${readKnowledge("regeln.md")}\n\n# JETZT\nAktuell ist ${nowInGermany(date)} Uhr (deutsche Zeit).\n\n# WISSEN\n${readKnowledge("wissen.md")}`;
 }
 
 export function toGeminiContents(messages) {

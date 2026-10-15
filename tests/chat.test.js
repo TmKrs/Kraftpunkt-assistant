@@ -16,3 +16,8 @@ test("history is mapped to Gemini roles and trimmed", () => {
   assert.ok(out.every((c) => c.role === "user" || c.role === "model"));
   assert.equal(out[0].parts[0].text.length, 600);
 });
+
+test("system prompt tells the model the current German time", () => {
+  const prompt = buildSystemPrompt(new Date("2026-10-17T08:30:00Z"));
+  assert.match(prompt, /Samstag, 17\. Oktober 2026 um 10:30/);
+});
