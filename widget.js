@@ -20,7 +20,7 @@
     background:${ACCENT};color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45);display:grid;place-items:center;transition:transform .15s}
   .kp-btn:hover{transform:scale(1.06)}
   .kp-btn svg{width:28px;height:28px}
-  .kp-win{position:fixed;right:20px;bottom:94px;z-index:2147483000;width:440px;height:min(640px,calc(100vh - 120px));max-width:calc(100vw - 32px);
+  .kp-win{position:fixed;right:20px;bottom:94px;z-index:2147483000;width:min(560px,calc(100vw - 40px));height:min(780px,calc(100vh - 120px));max-width:calc(100vw - 32px);
     background:#111;color:#f5f5f5;border:1px solid #2a2a2a;border-radius:6px;box-shadow:0 18px 50px rgba(0,0,0,.6);display:none;flex-direction:column;
     overflow:hidden;font:14px/1.5 Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
   .kp-win.open{display:flex}
