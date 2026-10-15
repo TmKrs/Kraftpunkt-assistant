@@ -21,3 +21,9 @@ test("system prompt tells the model the current German time", () => {
   const prompt = buildSystemPrompt(new Date("2026-10-17T08:30:00Z"));
   assert.match(prompt, /Samstag, 17\. Oktober 2026 um 10:30/);
 });
+
+test("general knowledge is included and labelled", () => {
+  const prompt = buildSystemPrompt();
+  assert.match(prompt, /# ALLGEMEINES WISSEN/);
+  assert.match(prompt, /28 Tagen/);
+});

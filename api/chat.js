@@ -22,7 +22,7 @@ export function nowInGermany(date = new Date()) {
 }
 
 export function buildSystemPrompt(date = new Date()) {
-  return `${readKnowledge("regeln.md")}\n\n# JETZT\nAktuell ist ${nowInGermany(date)} Uhr (deutsche Zeit).\n\n# WISSEN\n${readKnowledge("wissen.md")}`;
+  return `${readKnowledge("regeln.md")}\n\n# JETZT\nAktuell ist ${nowInGermany(date)} Uhr (deutsche Zeit).\n\n# WISSEN\n${readKnowledge("wissen.md")}\n\n# ALLGEMEINES WISSEN\n${readKnowledge("allgemein.md")}`;
 }
 
 export function toGeminiContents(messages) {
