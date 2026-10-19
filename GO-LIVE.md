@@ -15,12 +15,21 @@ Vercel → kraftpunkt-assistant → Settings → Environment Variables:
 
 Then Deployments → latest → "Redeploy".
 
-## 3. Embed on WordPress
-Install the free plugin **WPCode** (or Elementor Pro → Custom Code) and add this to the **footer** of all pages:
+## 3. Embed on WordPress (5 minutes, needs a WordPress admin login)
+Who: the owner, or whoever has an admin login for kraftpunkt.bayern (he can create an editor account for you).
+
+1. Open `https://kraftpunkt.bayern/wp-admin` and log in.
+2. Left menu → **Plugins → Add New** → search **WPCode** → **Install** → **Activate**.
+3. Left menu → **Code Snippets → Header & Footer**.
+4. Paste this line into the **Footer** box and click **Save Changes**:
 
 ```html
 <script src="https://kraftpunkt-assistant.vercel.app/widget.js" defer></script>
 ```
+
+5. Open kraftpunkt.bayern in a new tab: the blue chat bubble is now bottom right on every page.
+
+To remove the chat again: delete the line and save.
 
 ## 4. Privacy policy
 Add a paragraph that chat messages are processed by Google (Gemini API). The owner's privacy contact should word it. Not legal advice.
