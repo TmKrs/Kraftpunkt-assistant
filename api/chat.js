@@ -36,7 +36,15 @@ export function toGeminiContents(messages) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*"); // lets the widget run on kraftpunkt.bayern later
+  // Which websites may use the chat. Set ALLOWED_ORIGINS in Vercel, e.g. "https://kraftpunkt.bayern".
+  // The demo page itself is same-origin, so it always works.
+  const allowed = (process.env.ALLOWED_ORIGINS || "*").split(",").map((o) => o.trim());
+  const origin = req.headers?.origin;
+  if (allowed.includes("*")) res.setHeader("Access-Control-Allow-Origin", "*");
+  else if (origin && allowed.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+  }
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Nur POST erlaubt." });
